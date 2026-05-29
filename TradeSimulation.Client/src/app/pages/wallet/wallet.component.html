@@ -1,0 +1,115 @@
+<div class="wallet-page">
+  <div class="page-header">
+    <h1>Wallet</h1>
+    <span class="subtitle">Manage your virtual funds</span>
+  </div>
+
+  <!-- Balance Card -->
+  <div class="balance-card">
+    <div class="balance-section">
+      <span class="balance-label">AVAILABLE BALANCE</span>
+      <span class="balance-amount">₹{{ wallet?.Balance | number:'1.2-2' }}</span>
+      <span class="balance-note">Virtual funds · No real money involved</span>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="actions-grid">
+    <div class="action-card">
+      <h3>Deposit Funds</h3>
+      <p>Add virtual money to your trading wallet</p>
+      <div class="input-group">
+        <span class="currency-prefix">₹</span>
+        <input
+          type="number"
+          [(ngModel)]="depositAmount"
+          placeholder="Enter amount"
+          min="1"
+          id="deposit-input"
+        />
+      </div>
+      <div class="quick-amounts">
+        <button (click)="depositAmount = 100000">₹1L</button>
+        <button (click)="depositAmount = 500000">₹5L</button>
+        <button (click)="depositAmount = 1000000">₹10L</button>
+        <button (click)="depositAmount = 2500000">₹25L</button>
+      </div>
+      <button class="deposit-btn" (click)="deposit()" [disabled]="actionLoading || depositAmount <= 0">
+        {{ actionLoading ? 'Processing...' : 'Deposit' }}
+      </button>
+    </div>
+
+    <div class="action-card">
+      <h3>Withdraw Funds</h3>
+      <p>Remove virtual money from your wallet</p>
+      <div class="input-group">
+        <span class="currency-prefix">₹</span>
+        <input
+          type="number"
+          [(ngModel)]="withdrawAmount"
+          placeholder="Enter amount"
+          min="1"
+          id="withdraw-input"
+        />
+      </div>
+      <div class="quick-amounts">
+        <button (click)="withdrawAmount = 100000">₹1L</button>
+        <button (click)="withdrawAmount = 500000">₹5L</button>
+        <button (click)="withdrawAmount = 1000000">₹10L</button>
+        <button (click)="withdrawAmount = wallet?.Balance || 0">MAX</button>
+      </div>
+      <button class="withdraw-btn" (click)="withdraw()" [disabled]="actionLoading || withdrawAmount <= 0">
+        {{ actionLoading ? 'Processing...' : 'Withdraw' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Messages -->
+  @if (error) {
+    <div class="msg error-msg">{{ error }}</div>
+  }
+  @if (success) {
+    <div class="msg success-msg">{{ success }}</div>
+  }
+
+  <!-- Transaction History -->
+  <div class="history-section">
+    <h2>Transaction History</h2>
+    @if (transactions.length > 0) {
+      <div class="table-container">
+        <table class="txn-table">
+          <thead>
+            <tr>
+              <th>TYPE</th>
+              <th>DESCRIPTION</th>
+              <th>AMOUNT</th>
+              <th>DATE</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (txn of transactions; track txn.Id) {
+              <tr>
+                <td>
+                  <span class="type-badge" [class]="getTransactionTypeClass(txn.Type)">
+                    {{ getTransactionTypeLabel(txn.Type) }}
+                  </span>
+                </td>
+                <td class="desc-cell">{{ txn.Description }}</td>
+                <td class="mono">
+                  <span [class.positive]="txn.Type === 0 || txn.Type === 3" [class.negative]="txn.Type === 1 || txn.Type === 2">
+                    {{ txn.Type === 0 || txn.Type === 3 ? '+' : '-' }}₹{{ txn.Amount | number:'1.2-2' }}
+                  </span>
+                </td>
+                <td class="date-cell">{{ txn.CreatedAt | date:'dd MMM yyyy, hh:mm a' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <div class="empty-state">
+        <p>No transactions yet</p>
+      </div>
+    }
+  </div>
+</div>

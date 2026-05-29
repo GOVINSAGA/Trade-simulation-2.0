@@ -1,0 +1,339 @@
+.wallet-page {
+  padding: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 4px 0;
+}
+
+.subtitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: #666;
+}
+
+.balance-card {
+  background: #121212;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 36px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.balance-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: #666;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.balance-amount {
+  font-family: 'Space Mono', monospace;
+  font-size: 40px;
+  font-weight: 700;
+  color: #D4AF37;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.balance-note {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  color: #555;
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.action-card {
+  background: #121212;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.action-card h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 4px 0;
+}
+
+.action-card p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  color: #666;
+  margin: 0 0 16px 0;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background: #0a0a0a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  transition: border-color 0.15s ease;
+}
+
+.input-group:focus-within {
+  border-color: #D4AF37;
+}
+
+.currency-prefix {
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  color: #666;
+  padding: 0 14px;
+  border-right: 1px solid #2a2a2a;
+}
+
+.input-group input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  padding: 14px;
+  -moz-appearance: textfield;
+}
+
+.input-group input::-webkit-outer-spin-button,
+.input-group input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.input-group input::placeholder {
+  color: #444;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+}
+
+.quick-amounts {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.quick-amounts button {
+  flex: 1;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  color: #999;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.quick-amounts button:hover {
+  border-color: #D4AF37;
+  color: #D4AF37;
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.deposit-btn,
+.withdraw-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.deposit-btn {
+  background: #2ECC71;
+  color: #000;
+}
+
+.deposit-btn:hover:not(:disabled) {
+  background: #27ae60;
+}
+
+.withdraw-btn {
+  background: #E74C3C;
+  color: #fff;
+}
+
+.withdraw-btn:hover:not(:disabled) {
+  background: #c0392b;
+}
+
+.deposit-btn:disabled,
+.withdraw-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.msg {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.error-msg {
+  background: rgba(231, 76, 60, 0.1);
+  border: 1px solid rgba(231, 76, 60, 0.3);
+  color: #E74C3C;
+}
+
+.success-msg {
+  background: rgba(46, 204, 113, 0.1);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  color: #2ECC71;
+}
+
+.history-section {
+  margin-top: 8px;
+}
+
+.history-section h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 16px 0;
+}
+
+.table-container {
+  background: #121212;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.txn-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.txn-table th {
+  background: #0a0a0a;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #666;
+  letter-spacing: 1px;
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.txn-table td {
+  padding: 14px 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  color: #ccc;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.txn-table tbody tr {
+  transition: background 0.1s ease;
+}
+
+.txn-table tbody tr:hover {
+  background: #1a1a1a;
+}
+
+.type-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.type-deposit {
+  background: rgba(46, 204, 113, 0.1);
+  color: #2ECC71;
+  border: 1px solid rgba(46, 204, 113, 0.2);
+}
+
+.type-withdraw {
+  background: rgba(231, 76, 60, 0.1);
+  color: #E74C3C;
+  border: 1px solid rgba(231, 76, 60, 0.2);
+}
+
+.type-buy {
+  background: rgba(212, 175, 55, 0.1);
+  color: #D4AF37;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.type-sell {
+  background: rgba(46, 204, 113, 0.1);
+  color: #2ECC71;
+  border: 1px solid rgba(46, 204, 113, 0.2);
+}
+
+.desc-cell {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mono {
+  font-family: 'Space Mono', monospace;
+}
+
+.positive { color: #2ECC71; }
+.negative { color: #E74C3C; }
+
+.date-cell {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: #666;
+  white-space: nowrap;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  background: #121212;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+}
+
+.empty-state p {
+  font-family: 'Outfit', sans-serif;
+  color: #666;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .wallet-page { padding: 20px; }
+  .actions-grid { grid-template-columns: 1fr; }
+  .balance-amount { font-size: 28px; }
+}
