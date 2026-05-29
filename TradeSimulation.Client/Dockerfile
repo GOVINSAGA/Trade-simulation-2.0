@@ -15,7 +15,7 @@ RUN npm run build --configuration=production
 # Stage 2: Serve with Nginx
 FROM nginx:alpine
 # Copy compiled output from build stage
-COPY --from=build /app/dist/trade-simulation.client/browser /usr/share/nginx/html
+COPY --from=build /app/dist/TradeSimulation.Client/browser /usr/share/nginx/html
 
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
