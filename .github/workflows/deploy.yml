@@ -6,8 +6,8 @@ on:
       - master
 
 env:
-  API_IMAGE: ghcr.io/${{ github.repository }}-api
-  CLIENT_IMAGE: ghcr.io/${{ github.repository }}-client
+  API_IMAGE: ghcr.io/govinsaga/trade-sim-api
+  CLIENT_IMAGE: ghcr.io/govinsaga/trade-sim-client
 
 jobs:
   build-and-push:
