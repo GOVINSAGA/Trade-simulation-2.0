@@ -1,0 +1,236 @@
+.portfolio {
+  padding: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 4px 0;
+}
+
+.subtitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: #666;
+}
+
+.refresh-btn {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #D4AF37;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.refresh-btn:hover:not(:disabled) {
+  background: rgba(212, 175, 55, 0.15);
+}
+
+.summary-strip {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #121212;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 20px 28px;
+  margin-bottom: 24px;
+}
+
+.strip-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 20px;
+}
+
+.strip-item:first-child {
+  padding-left: 0;
+}
+
+.strip-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 1.5px;
+}
+
+.strip-value {
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.strip-value.gold { color: #D4AF37; }
+.strip-value.positive { color: #2ECC71; }
+.strip-value.negative { color: #E74C3C; }
+
+.strip-divider {
+  width: 1px;
+  height: 40px;
+  background: #2a2a2a;
+}
+
+.table-container {
+  background: #121212;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.holdings-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.holdings-table th {
+  background: #0a0a0a;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #666;
+  letter-spacing: 1px;
+  text-align: left;
+  padding: 14px 12px;
+  border-bottom: 1px solid #2a2a2a;
+  white-space: nowrap;
+}
+
+.holdings-table td {
+  padding: 14px 12px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  color: #ccc;
+  border-bottom: 1px solid #1a1a1a;
+  white-space: nowrap;
+}
+
+.holdings-table tbody tr {
+  transition: background 0.1s ease;
+}
+
+.holdings-table tbody tr:hover {
+  background: #1a1a1a;
+}
+
+.symbol-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sym-ticker {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #D4AF37;
+}
+
+.sym-name {
+  font-size: 11px;
+  color: #666;
+}
+
+.mono {
+  font-family: 'Space Mono', monospace;
+}
+
+.dim { color: #888; }
+
+.pnl-value {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.pnl-value.positive { color: #2ECC71; }
+.pnl-value.negative { color: #E74C3C; }
+
+.change-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.change-badge.positive {
+  color: #2ECC71;
+  background: rgba(46, 204, 113, 0.1);
+}
+
+.change-badge.negative {
+  color: #E74C3C;
+  background: rgba(231, 76, 60, 0.1);
+}
+
+.sector-cell {
+  font-size: 12px;
+  color: #777;
+}
+
+.sell-btn {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #E74C3C;
+  background: rgba(231, 76, 60, 0.08);
+  border: 1px solid rgba(231, 76, 60, 0.2);
+  padding: 6px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  letter-spacing: 0.5px;
+}
+
+.sell-btn:hover {
+  background: rgba(231, 76, 60, 0.15);
+  border-color: rgba(231, 76, 60, 0.4);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  background: #121212;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+}
+
+.empty-icon {
+  font-size: 48px;
+  color: #333;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+
+.empty-state p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}

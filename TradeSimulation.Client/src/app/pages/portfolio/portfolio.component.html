@@ -1,0 +1,114 @@
+<div class="portfolio">
+  <div class="page-header">
+    <div>
+      <h1>Portfolio</h1>
+      <span class="subtitle">Your holdings & performance</span>
+    </div>
+    <button class="refresh-btn" (click)="loadData()" [disabled]="loading">
+      {{ loading ? 'Loading...' : '⟳ Refresh' }}
+    </button>
+  </div>
+
+  <!-- Summary Strip -->
+  @if (summary) {
+    <div class="summary-strip">
+      <div class="strip-item">
+        <span class="strip-label">INVESTED</span>
+        <span class="strip-value">₹{{ summary.TotalInvested | number:'1.2-2' }}</span>
+      </div>
+      <div class="strip-divider"></div>
+      <div class="strip-item">
+        <span class="strip-label">CURRENT</span>
+        <span class="strip-value">₹{{ summary.CurrentValue | number:'1.2-2' }}</span>
+      </div>
+      <div class="strip-divider"></div>
+      <div class="strip-item">
+        <span class="strip-label">P&L</span>
+        <span class="strip-value" [class.positive]="summary.TotalPnL >= 0" [class.negative]="summary.TotalPnL < 0">
+          {{ summary.TotalPnL >= 0 ? '+' : '' }}₹{{ summary.TotalPnL | number:'1.2-2' }}
+        </span>
+      </div>
+      <div class="strip-divider"></div>
+      <div class="strip-item">
+        <span class="strip-label">RETURN</span>
+        <span class="strip-value" [class.positive]="summary.TotalPnLPercent >= 0" [class.negative]="summary.TotalPnLPercent < 0">
+          {{ summary.TotalPnLPercent >= 0 ? '+' : '' }}{{ summary.TotalPnLPercent | number:'1.2-2' }}%
+        </span>
+      </div>
+      <div class="strip-divider"></div>
+      <div class="strip-item">
+        <span class="strip-label">HOLDINGS</span>
+        <span class="strip-value gold">{{ summary.TotalHoldings }}</span>
+      </div>
+    </div>
+  }
+
+  <!-- Holdings Table -->
+  @if (holdings.length > 0) {
+    <div class="table-container">
+      <table class="holdings-table">
+        <thead>
+          <tr>
+            <th>SYMBOL</th>
+            <th>QTY</th>
+            <th>AVG PRICE</th>
+            <th>CURRENT</th>
+            <th>INVESTED</th>
+            <th>CURRENT VALUE</th>
+            <th>P&L</th>
+            <th>RETURN %</th>
+            <th>SECTOR</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (h of holdings; track h.Symbol) {
+            <tr>
+              <td>
+                <div class="symbol-cell">
+                  <span class="sym-ticker">{{ h.Symbol }}</span>
+                  <span class="sym-name">{{ h.DisplayName }}</span>
+                </div>
+              </td>
+              <td class="mono">{{ h.Quantity }}</td>
+              <td class="mono dim">₹{{ h.AvgBuyPrice | number:'1.2-2' }}</td>
+              <td class="mono">₹{{ h.CurrentPrice | number:'1.2-2' }}</td>
+              <td class="mono dim">₹{{ h.InvestedValue | number:'1.2-2' }}</td>
+              <td class="mono">₹{{ h.CurrentValue | number:'1.2-2' }}</td>
+              <td>
+                <span class="pnl-value" [class.positive]="h.PnL >= 0" [class.negative]="h.PnL < 0">
+                  {{ h.PnL >= 0 ? '+' : '' }}₹{{ h.PnL | number:'1.2-2' }}
+                </span>
+              </td>
+              <td>
+                <span class="change-badge" [class.positive]="h.PnLPercent >= 0" [class.negative]="h.PnLPercent < 0">
+                  {{ h.PnLPercent >= 0 ? '+' : '' }}{{ h.PnLPercent | number:'1.2-2' }}%
+                </span>
+              </td>
+              <td class="sector-cell">{{ h.Sector }}</td>
+              <td>
+                <button class="sell-btn" (click)="openSellDialog(h)">SELL</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else if (!loading) {
+    <div class="empty-state">
+      <span class="empty-icon">◆</span>
+      <h3>No Holdings Yet</h3>
+      <p>Start building your portfolio by buying stocks from the Market page.</p>
+    </div>
+  }
+</div>
+
+@if (showTradeDialog && selectedStock && selectedHolding) {
+  <app-trade-dialog
+    [stock]="selectedStock"
+    mode="sell"
+    [maxQuantity]="selectedHolding.Quantity"
+    (close)="showTradeDialog = false"
+    (traded)="onTraded()"
+  />
+}
