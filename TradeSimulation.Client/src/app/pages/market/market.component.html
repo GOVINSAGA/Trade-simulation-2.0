@@ -1,0 +1,95 @@
+<div class="market">
+  <div class="page-header">
+    <div>
+      <h1>Market Scanner</h1>
+      <span class="subtitle">NIFTY 50 Stocks · NSE</span>
+    </div>
+    <div class="header-actions">
+      <span class="last-updated" *ngIf="lastUpdated">Last updated: {{ lastUpdated }}</span>
+      <span class="auto-refresh-badge">⟳ {{ countdown }}s</span>
+      <button class="refresh-btn" (click)="loadStocks()" [disabled]="loading">
+        {{ loading ? 'Loading...' : '⟳ Refresh' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <span class="search-icon">⌕</span>
+    <input
+      type="text"
+      placeholder="Search by symbol, name, or sector..."
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="applyFilter()"
+      id="market-search"
+    />
+    <span class="result-count">{{ filteredStocks.length }} stocks</span>
+  </div>
+
+  <div class="table-container">
+    <table class="stock-table">
+      <thead>
+        <tr>
+          <th class="sticky-col">#</th>
+          <th class="sticky-col-2">SYMBOL</th>
+          <th (click)="sortBy('Ltp')" class="sortable">LTP {{ getSortIcon('Ltp') }}</th>
+          <th (click)="sortBy('PPerchange')" class="sortable">CHANGE % {{ getSortIcon('PPerchange') }}</th>
+          <th (click)="sortBy('Mcap')" class="sortable">MCAP {{ getSortIcon('Mcap') }}</th>
+          <th (click)="sortBy('Pe')" class="sortable">P/E {{ getSortIcon('Pe') }}</th>
+          <th>52W HIGH</th>
+          <th>52W LOW</th>
+          <th>VOLUME</th>
+          <th>SECTOR</th>
+          <th>RATING</th>
+          <th>ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (stock of filteredStocks; track stock.Sym; let i = $index) {
+          <tr>
+            <td class="sticky-col row-num">{{ i + 1 }}</td>
+            <td class="sticky-col-2">
+              <div class="symbol-cell">
+                <span class="sym-ticker">{{ stock.Sym }}</span>
+                <span class="sym-name">{{ stock.DispSym }}</span>
+              </div>
+            </td>
+            <td class="mono">₹{{ stock.Ltp | number:'1.2-2' }}</td>
+            <td>
+              <span class="change-badge" [class.positive]="stock.PPerchange >= 0" [class.negative]="stock.PPerchange < 0">
+                {{ stock.PPerchange >= 0 ? '+' : '' }}{{ stock.PPerchange | number:'1.2-2' }}%
+              </span>
+            </td>
+            <td class="mono dim">{{ formatMcap(stock.Mcap) }}</td>
+            <td class="mono dim">{{ stock.Pe | number:'1.2-2' }}</td>
+            <td class="mono dim">₹{{ stock.High1Yr | number:'1.2-2' }}</td>
+            <td class="mono dim">₹{{ stock.Low1Yr | number:'1.2-2' }}</td>
+            <td class="mono dim">{{ formatVolume(stock.Volume) }}</td>
+            <td class="sector-cell">{{ stock.Sector }}</td>
+            <td>
+              @if (stock.AnalystRating) {
+                <span class="rating-badge"
+                  [class.buy-rating]="stock.AnalystRating.Rating === 'Buy'"
+                  [class.hold-rating]="stock.AnalystRating.Rating === 'Hold'"
+                  [class.sell-rating]="stock.AnalystRating.Rating === 'Sell'">
+                  {{ stock.AnalystRating.Rating }}
+                </span>
+              }
+            </td>
+            <td>
+              <button class="buy-btn" (click)="openBuyDialog(stock)">BUY</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@if (showTradeDialog && selectedStock) {
+  <app-trade-dialog
+    [stock]="selectedStock"
+    mode="buy"
+    (close)="showTradeDialog = false"
+    (traded)="onTraded()"
+  />
+}
