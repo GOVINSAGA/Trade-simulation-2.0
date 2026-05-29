@@ -1,0 +1,106 @@
+<div class="dashboard">
+  <div class="page-header">
+    <h1>Dashboard</h1>
+    <span class="subtitle">Your trading overview at a glance</span>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="card-label">WALLET BALANCE</div>
+      <div class="card-value gold">₹{{ wallet?.Balance | number:'1.2-2' }}</div>
+      <div class="card-footer">Available for trading</div>
+    </div>
+
+    <div class="summary-card">
+      <div class="card-label">TOTAL INVESTED</div>
+      <div class="card-value">₹{{ summary?.TotalInvested | number:'1.2-2' }}</div>
+      <div class="card-footer">{{ summary?.TotalHoldings || 0 }} holdings</div>
+    </div>
+
+    <div class="summary-card">
+      <div class="card-label">CURRENT VALUE</div>
+      <div class="card-value">₹{{ summary?.CurrentValue | number:'1.2-2' }}</div>
+      <div class="card-footer">Live market value</div>
+    </div>
+
+    <div class="summary-card">
+      <div class="card-label">TOTAL P&L</div>
+      <div class="card-value" [class.positive]="(summary?.TotalPnL ?? 0) >= 0" [class.negative]="(summary?.TotalPnL ?? 0) < 0">
+        {{ (summary?.TotalPnL ?? 0) >= 0 ? '+' : '' }}₹{{ summary?.TotalPnL | number:'1.2-2' }}
+      </div>
+      <div class="card-footer" [class.positive]="(summary?.TotalPnLPercent ?? 0) >= 0" [class.negative]="(summary?.TotalPnLPercent ?? 0) < 0">
+        {{ (summary?.TotalPnLPercent ?? 0) >= 0 ? '+' : '' }}{{ summary?.TotalPnLPercent | number:'1.2-2' }}%
+      </div>
+    </div>
+  </div>
+
+  <!-- Market Movers -->
+  <div class="movers-section">
+    <div class="mover-panel">
+      <div class="panel-header">
+        <h2>Top Gainers</h2>
+        <span class="badge positive-bg">▲ Today</span>
+      </div>
+      <div class="mover-list">
+        @for (stock of topGainers; track stock.Sym) {
+          <div class="mover-row">
+            <div class="mover-info">
+              <span class="mover-ticker">{{ stock.Sym }}</span>
+              <span class="mover-name">{{ stock.DispSym }}</span>
+            </div>
+            <div class="mover-data">
+              <span class="mover-price">₹{{ stock.Ltp | number:'1.2-2' }}</span>
+              <span class="mover-change positive">+{{ stock.PPerchange | number:'1.2-2' }}%</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="mover-panel">
+      <div class="panel-header">
+        <h2>Top Losers</h2>
+        <span class="badge negative-bg">▼ Today</span>
+      </div>
+      <div class="mover-list">
+        @for (stock of topLosers; track stock.Sym) {
+          <div class="mover-row">
+            <div class="mover-info">
+              <span class="mover-ticker">{{ stock.Sym }}</span>
+              <span class="mover-name">{{ stock.DispSym }}</span>
+            </div>
+            <div class="mover-data">
+              <span class="mover-price">₹{{ stock.Ltp | number:'1.2-2' }}</span>
+              <span class="mover-change negative">{{ stock.PPerchange | number:'1.2-2' }}%</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="quick-actions">
+    <a routerLink="/market" class="action-card">
+      <span class="action-icon">◈</span>
+      <span class="action-label">Browse Market</span>
+      <span class="action-desc">Explore NIFTY 50 stocks</span>
+    </a>
+    <a routerLink="/portfolio" class="action-card">
+      <span class="action-icon">◆</span>
+      <span class="action-label">View Portfolio</span>
+      <span class="action-desc">Track your holdings</span>
+    </a>
+    <a routerLink="/wallet" class="action-card">
+      <span class="action-icon">◇</span>
+      <span class="action-label">Manage Wallet</span>
+      <span class="action-desc">Add or withdraw funds</span>
+    </a>
+  </div>
+
+  <div class="disclaimer">
+    <span class="disclaimer-icon">⚠</span>
+    This is a paper trading simulator. No real money is involved. Prices are fetched from live market data for educational purposes only.
+  </div>
+</div>
