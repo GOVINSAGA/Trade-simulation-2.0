@@ -1,0 +1,6 @@
+@TradeSimulation.API_HostAddress = http://localhost:5223
+
+GET {{TradeSimulation.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
