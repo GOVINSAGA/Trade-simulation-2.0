@@ -1,0 +1,32 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="logo-icon">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M4 20L10 12L16 16L24 6" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M18 6H24V12" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <span class="brand-text">TradeSimulator</span>
+    <span class="brand-tag">PAPER TRADING</span>
+  </div>
+
+  <div class="navbar-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <span class="nav-icon">◉</span> Dashboard
+    </a>
+    <a routerLink="/market" routerLinkActive="active">
+      <span class="nav-icon">◈</span> Market
+    </a>
+    <a routerLink="/portfolio" routerLinkActive="active">
+      <span class="nav-icon">◆</span> Portfolio
+    </a>
+    <a routerLink="/wallet" routerLinkActive="active">
+      <span class="nav-icon">◇</span> Wallet
+    </a>
+  </div>
+
+  <div class="navbar-wallet">
+    <span class="wallet-label">BALANCE</span>
+    <span class="wallet-amount">₹{{ balance | number:'1.2-2' }}</span>
+  </div>
+</nav>

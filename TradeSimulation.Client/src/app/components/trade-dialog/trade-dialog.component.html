@@ -1,0 +1,64 @@
+<div class="dialog-overlay" (click)="close.emit()">
+  <div class="dialog-card" (click)="$event.stopPropagation()">
+    <div class="dialog-header">
+      <h3>{{ mode === 'buy' ? 'Buy' : 'Sell' }} Stock</h3>
+      <button class="close-btn" (click)="close.emit()">✕</button>
+    </div>
+
+    @if (stock) {
+      <div class="stock-info">
+        <div class="stock-name">
+          <span class="ticker">{{ stock.Sym }}</span>
+          <span class="disp-name">{{ stock.DispSym }}</span>
+        </div>
+        <div class="stock-price">
+          <span class="ltp">₹{{ stock.Ltp | number:'1.2-2' }}</span>
+          <span class="change" [class.positive]="stock.PPerchange >= 0" [class.negative]="stock.PPerchange < 0">
+            {{ stock.PPerchange >= 0 ? '+' : '' }}{{ stock.PPerchange | number:'1.2-2' }}%
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Quantity</label>
+        <div class="quantity-input">
+          <button class="qty-btn" (click)="quantity = quantity > 1 ? quantity - 1 : 1">−</button>
+          <input type="number" [(ngModel)]="quantity" min="1" [max]="mode === 'sell' ? maxQuantity : 99999" />
+          <button class="qty-btn" (click)="quantity = quantity + 1">+</button>
+        </div>
+        @if (mode === 'sell') {
+          <span class="max-info">Max: {{ maxQuantity }} shares</span>
+        }
+      </div>
+
+      <div class="cost-breakdown">
+        <div class="cost-row">
+          <span>Price per share</span>
+          <span class="mono">₹{{ stock.Ltp | number:'1.2-2' }}</span>
+        </div>
+        <div class="cost-row">
+          <span>Quantity</span>
+          <span class="mono">× {{ quantity }}</span>
+        </div>
+        <div class="cost-divider"></div>
+        <div class="cost-row total">
+          <span>{{ mode === 'buy' ? 'Total Cost' : 'Total Value' }}</span>
+          <span class="mono gold">₹{{ totalCost | number:'1.2-2' }}</span>
+        </div>
+      </div>
+
+      @if (error) {
+        <div class="error-msg">{{ error }}</div>
+      }
+
+      <button
+        class="execute-btn"
+        [class.buy-btn]="mode === 'buy'"
+        [class.sell-btn]="mode === 'sell'"
+        [disabled]="loading || quantity <= 0"
+        (click)="executeTrade()">
+        {{ loading ? 'Processing...' : (mode === 'buy' ? 'Confirm Buy' : 'Confirm Sell') }}
+      </button>
+    }
+  </div>
+</div>
